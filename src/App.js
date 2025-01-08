@@ -8,6 +8,7 @@ import Board from './tictactoe/Board';
 import InputTest from './InputTest';
 import Game from './tictactoe/Game';
 import TicTacToe from './tictactoe2/TicTacToe';
+import TicTacToeLast from './tictactoe3/TicTacToeLast';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
 
   return(
     <>
-    <TicTacToe/>
+    <TicTacToeLast/>
+    {/* <TicTacToe/> */}
       {/* <Game /> */}
       {/* <InputTest/> */}
     </>

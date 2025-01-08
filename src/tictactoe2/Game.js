@@ -27,7 +27,6 @@ const Game = () => {
     };
 
     const moves = value.map((_, idx) => {
-        
         return(
             <li key={idx}>
                 <button onClick={()=>jumpTo(idx)}>{idx}</button>
