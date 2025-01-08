@@ -2,46 +2,38 @@ import React, {useState} from "react";
 import Board from "./Board";
 
 const Game = () => {
-    // const [value, setValue] = useState(Array(9).fill(null));
     const [value, setValue] = useState([Array(9).fill(null)]);
-    const [isNext, setIsNext] = useState(true);
+    const [isNext, setIsNext] = useState(false);
     const [currentIdx, setCurrentIdx] = useState(0);
-    // const test = value[currentIdx];
     const currentValue = value[currentIdx];
 
-    const onPlay = (nextValue) => {
-        const history = [...value.slice(0, currentIdx + 1), nextValue];
-        console.log(history);
-        setValue(history)
-        // setValue([...value, nextValue]);
-        setCurrentIdx(history.length - 1);
+    const onPlay = (nextSquare) => {
+        const history = [...value.slice(0, currentIdx + 1), nextSquare]
+        // setValue([...value, nextSquare]);
+        setValue(history);
         setIsNext(!isNext);
+        setCurrentIdx(history.length - 1);
     }
 
     const jumpTo = (idx) => {
-        console.log("idx :" + idx);
         setCurrentIdx(idx);
-        setIsNext(currentIdx % 2 === 0)
+        setIsNext(idx % 2 !== 0);
     }
 
     const moves = value.map((_, idx) => {
         let description;
 
         if(idx > 0){
-            description = "jump to # " + idx + "!!!";
+            description = "move # " + idx + " !!!";
         }else{
-            description = "Start!! # " + idx + "!!!";
+            description = "Let's Play Start!!";
         }
 
         return(
-            <li key={idx}>
-                <button onClick={()=>jumpTo(idx)}>{description}</button>
-            </li>
+            <li key={idx}><button onClick={() => jumpTo(idx)}>{description}</button></li>
         )
-    });
-
+    })
     return(
-        <>
         <div className="game">
             <div className="game-board">
                 <Board value={currentValue} isNext={isNext} onPlay={onPlay}/>
@@ -50,7 +42,7 @@ const Game = () => {
                 <ol>{moves}</ol>
             </div>
         </div>
-        </>
     )
 }
+
 export default Game;
